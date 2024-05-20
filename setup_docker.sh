@@ -20,3 +20,4 @@ docker pull honmashironeko/arl-docker
 # 运行Docker容器
 echo "正在运行Docker容器..."
 docker run -d -p 5003:5003 --name arl --privileged=true honmashironeko/arl-docker /usr/sbin/init
+
