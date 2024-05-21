@@ -20,13 +20,16 @@
 
 执行部署脚本：`bash setup_docker.sh`
 
-![图片](./assets/640.webp)
+![image](https://github.com/honmashironeko/ARL-docker/assets/139044047/f55c5453-b41c-4c50-bdcc-dca689c30d71)
+
 
 输入数字确认安装版本：1 or 2 or 3
 
 前往ARLweb页面：`https://IP:5003/`
 
-![图片](./assets/640-1716266394547-1.webp)
+![image](https://github.com/honmashironeko/ARL-docker/assets/139044047/59d7a704-ee55-4365-bd8f-cd3a52f8c046)
+
+
 
 `账号：admin，密码：honmashironeko`
 
