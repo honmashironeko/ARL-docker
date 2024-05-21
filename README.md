@@ -10,6 +10,7 @@
 
 4、执行部署脚本：bash setup_docker.sh
 ![Clip_2024-05-21_11-18-05](https://github.com/honmashironeko/ARL-docker/assets/139044047/84b17c4d-7005-4d61-81b0-b91e4d5e6df4)
+![Clip_2024-05-21_11-20-02](https://github.com/honmashironeko/ARL-docker/assets/139044047/93a72b17-7535-4db6-94ac-6beed92fead0)
 
 
 ## 手动安装步骤：
