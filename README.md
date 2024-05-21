@@ -54,10 +54,15 @@
 建议您采取源码安装的方式，问题较少，如果您使用 docker 容器部署，您需要做以下操作：
 
 进入容器：`docker exec -it arl /bin/bash`
+
 运行命令：
+
 `rabbitmqctl add_user arl arlpassword`
+
 `rabbitmqctl set_user_tags arl administrator`
+
 `rabbitmqctl add_vhost arlv2host`
+
 `rabbitmqctl set_permissions -p arlv2host arl ".*" ".*" ".*"`
 
 经过测试，docker在PUSH上传后，其他地方PULL下载的时候会出现错误，因此需要这步操作。
