@@ -35,9 +35,22 @@ arl-docker-all：ARL完全指纹版本，去除域名限制，全量 <span style
 6、账号：admin，密码：honmashironeko
 
 ![image](https://github.com/honmashironeko/ARL-docker/assets/139044047/46504320-97b4-44e3-aa06-ba121cb33cd6)
-## 特别鸣谢
+# 特别鸣谢
 感谢ARL项目备份：https://github.com/Aabyss-Team/ARL
 
 感谢部分指纹提供：https://github.com/loecho-sec/ARL-Finger-ADD
 
 感谢全量指纹提供：曾哥
+
+# 源码安装
+根据ARL官方V2.6.2版本源码，修复部分bug之后制作完成的源码安装脚本
+
+1、下载部署脚本项目：git clone https://github.com/honmashironeko/ARL-docker.git
+
+2、进入项目文件夹：cd ARL-docker/
+
+3、添加运行权限：chmod +x setup-arl.sh
+
+4、执行部署脚本：bash setup-arl.sh
+
+5、可能会在运行的时候报错一次，不需要管他，重新运行一遍 bash setup-arl.sh 即可。
