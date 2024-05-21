@@ -12,8 +12,8 @@ systemctl start docker
 
 echo "请选择要安装的版本："
 echo "1) arl-docker-initial：ARL初始版本，仅去除域名限制。"
-echo "2) arl-docker-portion：ARL部分指纹版本，去除域名限制，并增加5232条指纹。"
-echo "3) arl-docker-all：ARL完全指纹版本，去除域名限制，全量七千余指纹。"
+echo "2) arl-docker-portion：ARL部分指纹版本，去除域名限制，并增加 5232 条指纹。"
+echo "3) arl-docker-all：ARL完全指纹版本，去除域名限制，全量 6990 条指纹。"
 read -p "请输入选项（1-3）：" version_choice
 
 case $version_choice in
