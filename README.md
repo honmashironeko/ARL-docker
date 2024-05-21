@@ -1,5 +1,11 @@
 # ARL(灯塔）-docker版
-本项目基于ARL v2.6.2版本源码，制作成docker镜像进行快速部署，到手即用。
+本项目基于ARL v2.6.2版本源码，制作成docker镜像进行快速部署，并提供三种指纹规格的镜像。
+
+arl-docker-initial：ARL初始版本，仅去除域名限制。
+
+arl-docker-portion：ARL部分指纹版本，去除域名限制，并增加 <span style="color: #333333;">5232 条</span>指纹。
+
+arl-docker-all：ARL完全指纹版本，去除域名限制，全量 <span style="color: #333333;">6990 条</span>指纹。
 # 使用教程
 ## 一键部署脚本：
 1、下载部署脚本项目：git clone https://github.com/honmashironeko/ARL-docker.git
