@@ -39,5 +39,5 @@ case $version_choice in
         echo "无效的输入，脚本将退出。"
         exit 1
         ;;
-
+esac
 
