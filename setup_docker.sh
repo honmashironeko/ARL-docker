@@ -18,22 +18,26 @@ read -p "请输入选项（1-3）：" version_choice
 
 case $version_choice in
     1)
-        docker_image="honmashironeko/arl-docker-initial"
+        echo "正在拉取 Docker 镜像：arl-docker-initial..."
+        docker pull honmashironeko/arl-docker-initial
+        echo "正在运行 Docker 容器..."
+        docker run -d -p 5003:5003 --name arl --privileged=true honmashironeko/arl-docker-initial /usr/sbin/init
         ;;
     2)
-        docker_image="honmashironeko/arl-docker-portion"
+        echo "正在拉取 Docker 镜像：arl-docker-portion..."
+        docker pull honmashironeko/arl-docker-portion
+        echo "正在运行 Docker 容器..."
+        docker run -d -p 5003:5003 --name arl --privileged=true honmashironeko/arl-docker-portion /usr/sbin/init
         ;;
     3)
-        docker_image="honmashironeko/arl-docker-all"
+        echo "正在拉取 Docker 镜像：arl-docker-all..."
+        docker pull honmashironeko/arl-docker-all
+        echo "正在运行 Docker 容器..."
+        docker run -d -p 5003:5003 --name arl --privileged=true honmashironeko/arl-docker-all /usr/sbin/init
         ;;
     *)
         echo "无效的输入，脚本将退出。"
         exit 1
         ;;
-esac
 
-echo "正在拉取 Docker 镜像：$docker_image..."
-docker pull $docker_image
 
-echo "正在运行 Docker 容器..."
-docker run -d -p 5003:5003 --name arl --privileged=true $docker_image /usr/sbin/init
