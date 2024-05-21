@@ -35,9 +35,8 @@
 
 ## 手动安装步骤：
 
-<span style="color: rgba(0, 0, 0, 0.9);">此处请注意，根据您希望安装的 docker 镜像进行选择，“honmashironeko/” 后面应当跟着"arl-docker-initial、arl-docker-portion、arl-docker-all"其中一个。</span>
+此处请注意，根据您希望安装的 docker 镜像进行选择，“honmashironeko/” 后面应当跟着"arl-docker-initial、arl-docker-portion、arl-docker-all"其中一个。
 
-&nbsp;
 
 安装docker：`yum -y install docker`
 
@@ -50,6 +49,18 @@
 前往ARLweb页面：`https:*//IP:5003/*`
 
 `账号：admin，密码：honmashironeko`
+
+# 常见问题
+建议您采取源码安装的方式，问题较少，如果您使用 docker 容器部署，您需要做以下操作：
+
+进入容器：`docker exec -it arl /bin/bash`
+运行命令：
+`rabbitmqctl add_user arl arlpassword`
+`rabbitmqctl set_user_tags arl administrator`
+`rabbitmqctl add_vhost arlv2host`
+`rabbitmqctl set_permissions -p arlv2host arl ".*" ".*" ".*"`
+
+经过测试，docker在PUSH上传后，其他地方PULL下载的时候会出现错误，因此需要这步操作。
 
 # 特别鸣谢
 
