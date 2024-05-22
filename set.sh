@@ -6,7 +6,7 @@ mkdir -p /opt/
 cd /opt/
 
 echo "安装依赖项 ..."
-echo y | yum localinstall /root/arl/yum/*.rpm
+yum localinstall -y /root/arl/yum/*.rpm
 
 if [ ! -f /usr/bin/python3.6 ]; then
   echo "链接 python3.6"
