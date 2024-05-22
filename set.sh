@@ -64,7 +64,8 @@ fi
 
 cd ARL-NPoC
 echo "安装 poc 必须库 ..."
-pip3.6 install -r requirements.txt
+
+pip3.6 install /root/arl/pip/*.whl
 pip3.6 install -e .
 cd ../
 
@@ -104,8 +105,6 @@ if [ ! -f rabbitmq_user ]; then
   touch rabbitmq_user
 fi
 
-echo "安装 arl 必须库 ..."
-pip3.6 install -r requirements.txt
 if [ ! -f app/config.yaml ]; then
   echo "create config.yaml"
   cp app/config.yaml.example  app/config.yaml
