@@ -54,12 +54,12 @@ systemctl start rabbitmq-server
 
 if [ ! -d ARL ]; then
   echo "复制 ARL 项目"
-  cp /root/arl/misc/ARL /opt
+  cp -r /root/arl/misc/ARL /opt
 fi
 
 if [ ! -d "ARL-NPoC" ]; then
   echo "复制 ARL-NPoC 项目"
-  cp /root/arl/misc/ARL-NPoC /opt
+  cp -r /root/arl/misc/ARL-NPoC /opt
 fi
 
 cd ARL-NPoC
