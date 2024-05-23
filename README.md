@@ -65,6 +65,10 @@
 
 `rabbitmqctl set_permissions -p arlv2host arl ".*" ".*" ".*"`
 
+`mongo 127.0.0.1:27017/arl docker/mongo-init.js`
+
+`touch rabbitmq_user`
+
 经过测试，docker在PUSH上传后，其他地方PULL下载的时候会出现错误，因此需要这步操作。
 
 # 特别鸣谢
