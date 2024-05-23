@@ -20,6 +20,7 @@
 
 执行部署脚本：`bash setup_docker.sh`
 
+![image](https://github.com/honmashironeko/ARL-docker/assets/139044047/3d496754-ada5-4ab2-ad10-7d9f3827cfb9)
 
 
 输入数字确认安装版本：1 or 2 or 3
@@ -55,6 +56,7 @@
 
 `账号：admin，密码：honmashironeko`
 
+![image](https://github.com/honmashironeko/ARL-docker/assets/139044047/8cd0408b-880b-4772-821d-932c7f1a948f)
 
 
 # 特别鸣谢
