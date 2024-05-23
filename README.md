@@ -57,28 +57,6 @@
 
 
 
-# 常见问题
-建议您采取源码安装的方式，问题较少，如果您使用 docker 容器部署，您需要做以下操作：
-
-进入容器：`docker exec -it arl /bin/bash`
-
-运行命令：
-
-`rabbitmqctl add_user arl arlpassword`
-
-`rabbitmqctl set_user_tags arl administrator`
-
-`rabbitmqctl add_vhost arlv2host`
-
-`rabbitmqctl set_permissions -p arlv2host arl ".*" ".*" ".*"`
-
-`mongo 127.0.0.1:27017/arl docker/mongo-init.js`
-
-`touch rabbitmq_user`
-
-经过测试，docker在PUSH上传后，其他地方PULL下载的时候会出现错误，因此需要这步操作。
->>>>>>> 4d33d04c8917684f4935945b0a7aad64e37f363b
-
 # 特别鸣谢
 
 感谢ARL项目：https://github.com/TophantTechnology/ARL
