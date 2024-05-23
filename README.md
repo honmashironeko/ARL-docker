@@ -75,7 +75,13 @@
 
 ## 本地环境安装法
 
-下载项目压缩包：`https://github.com/honmashironeko/ARL-docker/releases/`
+下载项目压缩包：
+
+Github：https://github.com/honmashironeko/icpscan/releases
+
+夸克网盘：https://pan.quark.cn/s/39b4b5674570#/list/share
+
+百度网盘：https://pan.baidu.com/s/1C9LVC9aiaQeYFSj_2mWH1w?pwd=13r5/
 
 移动压缩包：`mv arl-initial.tar /root`
 
