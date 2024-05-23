@@ -4,9 +4,9 @@
 
 1.  arl-docker-initial：ARL初始版本，仅去除域名限制。
 
-2.  arl-docker-portion：ARL部分指纹版本，去除域名限制，并增加 <span style="color: #333333;">5232 条</span>指纹。
+2.  arl-docker-portion：ARL部分指纹版本，去除域名限制，并增加 5232 条指纹。
 
-3.  arl-docker-all：ARL完全指纹版本，去除域名限制，全量 <span style="color: #333333;">6990 条</span>指纹。
+3.  arl-docker-all：ARL完全指纹版本，去除域名限制，全量 6990 条指纹。
 
 # 使用教程
 
@@ -20,16 +20,15 @@
 
 执行部署脚本：`bash setup_docker.sh`
 
-![image](https://github.com/honmashironeko/ARL-docker/assets/139044047/f55c5453-b41c-4c50-bdcc-dca689c30d71)
-
+![image](./assets/f55c5453-b41c-4c50-bdcc-dca689c30d71.png)
 
 输入数字确认安装版本：1 or 2 or 3
 
+在安装完成之后进入容器：`docker exec -it arl /bin/bash`
+
+开始完成ARL部署：`bash /root/arl/set.sh`
+
 前往ARLweb页面：`https://IP:5003/`
-
-![image](https://github.com/honmashironeko/ARL-docker/assets/139044047/59d7a704-ee55-4365-bd8f-cd3a52f8c046)
-
-
 
 `账号：admin，密码：honmashironeko`
 
@@ -46,26 +45,17 @@
 
 运行docker容器：`docker run -d -p 5003:5003 --name arl --privileged=true honmashironeko/arl-docker-initial /usr/sbin/init`
 
+在安装完成之后进入容器：`docker exec -it arl /bin/bash`
+
+开始完成ARL部署：`bash /root/arl/set.sh`
+
+前往ARLweb页面：`https://IP:5003/`
+
 前往ARLweb页面：`https:*//IP:5003/*`
 
 `账号：admin，密码：honmashironeko`
 
-# 常见问题
-建议您采取源码安装的方式，问题较少，如果您使用 docker 容器部署，您需要做以下操作：
-
-进入容器：`docker exec -it arl /bin/bash`
-
-运行命令：
-
-`rabbitmqctl add_user arl arlpassword`
-
-`rabbitmqctl set_user_tags arl administrator`
-
-`rabbitmqctl add_vhost arlv2host`
-
-`rabbitmqctl set_permissions -p arlv2host arl ".*" ".*" ".*"`
-
-经过测试，docker在PUSH上传后，其他地方PULL下载的时候会出现错误，因此需要这步操作。
+![1716448609222](./assets/1716448609222.jpg)
 
 # 特别鸣谢
 
@@ -81,7 +71,19 @@
 
 根据ARL官方V2.6.2版本源码，修复部分bug之后制作完成的源码安装脚本
 
-下载部署脚本项目：`git clone https:*//github.com/honmashironeko/ARL-docker.git*`
+## 本地环境安装法
+
+下载项目压缩包：`https://github.com/honmashironeko/ARL-docker/releases/`
+
+移动压缩包：`mv arl-initial.tar /root`
+
+解压文件：`tar -xvf arl-initial.tar`
+
+执行部署脚本：`bash /root/arl/set.sh`
+
+## 在线下载安装法
+
+下载部署脚本项目：`git clone https://github.com/honmashironeko/ARL-docker.git`
 
 进入项目文件夹：`cd ARL-docker/`
 
@@ -91,7 +93,9 @@
 
 可能会在运行的时候报错一次，不需要管他，重新运行一遍 bash setup-arl.sh 即可。
 
-# 文件配置
+# 基本配置
+
+如果需要配置 KEY 等内容，或控制 ARL 开启和关闭，可以采用以下方法
 
 您需要先进入容器中再进行操作，方法如下
 
@@ -106,4 +110,3 @@
 增加运行权限：`chmod +x manage.sh`
 
 重启ARL相关服务：`./manage.sh restart`
-
