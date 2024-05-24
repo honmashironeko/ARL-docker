@@ -54,8 +54,6 @@
 
 前往ARLweb页面：`https://IP:5003/`
 
-前往ARLweb页面：`https:*//IP:5003/*`
-
 `账号：admin，密码：honmashironeko`
 
 ![image](https://github.com/honmashironeko/ARL-docker/assets/139044047/8cd0408b-880b-4772-821d-932c7f1a948f)
