@@ -4,11 +4,11 @@
 
 1.  arl-docker-initial：ARL初始版本，仅去除域名限制。
 
-2.  arl-docker-portion：ARL部分指纹版本，去除域名限制，并增加 5232 条指纹。
+2.  arl-docker-portion：ARL部分指纹版本，去除域名限制，并增加 5232 条指纹。（仅适配Centos系统，因为没多少人用这个）
 
 3.  arl-docker-all：ARL完全指纹版本，去除域名限制，全量 6990 条指纹。
 
-**请注意，当前还未适配 Ubuntu 系统，请使用 Centos 系统**
+**请注意，当前适配全部系统（如有问题，请联系我）**
 
 # 使用教程
 
