@@ -20,7 +20,7 @@
 
 执行部署脚本：`bash setup_docker.sh`
 
-![image](https://github.com/honmashironeko/ARL-docker/assets/139044047/3d496754-ada5-4ab2-ad10-7d9f3827cfb9)
+![Clip_2024-05-29_15-38-52](https://github.com/honmashironeko/ARL-docker/assets/139044047/ad96b024-194c-4711-8d4c-0079e535341a)
 
 
 输入数字确认安装版本：1 or 2
