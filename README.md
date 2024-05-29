@@ -2,7 +2,7 @@
 
 # ARL(灯塔）-docker版
 
-本项目基于ARL v2.6.2版本源码，制作成docker镜像进行快速部署，并提供两种指纹规格的镜像。
+本项目基于渊龙团队备份：[ARL](https://github.com/Aabyss-Team/ARL) v2.6.2版本源码，制作成docker镜像进行快速部署，并提供两种指纹规格的镜像。
 
 1.  arl-docker-initial：ARL初始版本，仅去除域名限制。
 
