@@ -39,8 +39,9 @@ Centos以外的版本请注意，脚本采用的是yum安装工具，如果是ap
 
 此处请注意，根据您希望安装的 docker 镜像进行选择，“honmashironeko/” 后面应当跟着"arl-docker-initial、arl-docker-all"其中一个。
 
-
 安装docker：`yum -y install docker`
+
+其他系统安装：`apt install docker.io -y`
 
 启动docker服务：`systemctl start docker`
 
