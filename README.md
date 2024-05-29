@@ -20,6 +20,8 @@
 
 执行部署脚本：`bash setup_docker.sh`
 
+Centos以外的版本请注意，脚本采用的是yum安装工具，如果是apt的话请运行`apt install docker.io -y`
+
 ![Clip_2024-05-29_15-38-52](https://github.com/honmashironeko/ARL-docker/assets/139044047/ad96b024-194c-4711-8d4c-0079e535341a)
 
 
