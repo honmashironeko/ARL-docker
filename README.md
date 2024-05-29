@@ -4,9 +4,7 @@
 
 1.  arl-docker-initial：ARL初始版本，仅去除域名限制。
 
-2.  arl-docker-portion：ARL部分指纹版本，去除域名限制，并增加 5232 条指纹。（仅适配Centos系统，因为没多少人用这个）
-
-3.  arl-docker-all：ARL完全指纹版本，去除域名限制，全量 6990 条指纹。
+2.  arl-docker-all：ARL完全指纹版本，去除域名限制，全量 7165 条指纹。
 
 **请注意，当前适配全部系统（如有问题，请联系我）**
 
@@ -25,7 +23,7 @@
 ![image](https://github.com/honmashironeko/ARL-docker/assets/139044047/3d496754-ada5-4ab2-ad10-7d9f3827cfb9)
 
 
-输入数字确认安装版本：1 or 2 or 3
+输入数字确认安装版本：1 or 2
 
 在安装完成之后进入容器：`docker exec -it arl /bin/bash`
 
@@ -37,7 +35,7 @@
 
 ## 手动安装步骤：
 
-此处请注意，根据您希望安装的 docker 镜像进行选择，“honmashironeko/” 后面应当跟着"arl-docker-initial、arl-docker-portion、arl-docker-all"其中一个。
+此处请注意，根据您希望安装的 docker 镜像进行选择，“honmashironeko/” 后面应当跟着"arl-docker-initial、arl-docker-all"其中一个。
 
 
 安装docker：`yum -y install docker`
@@ -65,9 +63,7 @@
 
 感谢ARL项目备份：https://github.com/Aabyss-Team/ARL
 
-感谢部分指纹提供：https://github.com/loecho-sec/ARL-Finger-ADD
-
-感谢全量指纹提供：https://blog.zgsec.cn/
+感谢部分指纹提供：https://blog.zgsec.cn/
 
 # 源码安装
 
