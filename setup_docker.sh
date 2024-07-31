@@ -12,7 +12,22 @@ read -n 1 -s
 clear
 
 # 换源及安装docker服务
-bash main.sh
+
+echo "请选择是否需要更换 yum 或 apt 下载源："
+echo "1) 不进行更换，使用默认下载源"
+echo "2) 运行替换脚本，更换下载源"
+read -p "请输入选项（1-2）：" sz
+
+case $sz in
+    1)
+        echo "不进行更换，使用默认下载源"
+    2)
+        bash main.sh
+    *)
+        echo "无效的输入，脚本将退出。"
+        exit 1
+        ;;
+esac
 
 if command -v yum &> /dev/null; then
     echo "正在使用 yum 安装 Docker..."
