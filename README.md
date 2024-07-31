@@ -8,9 +8,7 @@
 
 2.  arl-docker-all：ARL完全指纹版本，去除域名限制，全量 7165 条指纹。
   
-3.  请注意，添加指纹的工具借用的是 ARL-Finger-ADD ，但指纹不是哦，由多处获取，经过格式转换、指纹去重后保留下来的一批指纹。
-
-**请注意，原版安装方式中，mongodb 4.0已经跑路，请更换其他方式手动安装一下，后续有空了会更新修复，如果您使用作者提供的完整安装包，进行本地化安装则正常**
+3.  请注意，添加指纹的工具借用的是 ARL-Finger-ADD ，但指纹不是哦，由多处获取，经过格式转换、指纹去重后保留下来的一批指纹，原指纹量达到6w+但其实重复极多。
 
 # 使用教程
 
@@ -24,44 +22,16 @@
 
 执行部署脚本：`bash setup_docker.sh`
 
-Centos以外的版本请注意，脚本采用的是yum安装工具，如果是apt的话请运行：`apt install docker.io -y`
-
-![Clip_2024-05-29_15-38-52](https://github.com/honmashironeko/ARL-docker/assets/139044047/ad96b024-194c-4711-8d4c-0079e535341a)
 
 
-输入数字确认安装版本：1 or 2
 
-在安装完成之后进入容器：`docker exec -it arl /bin/bash`
-
-开始完成ARL部署：`bash /root/arl/set.sh`
+根据脚本提示进行操作
 
 前往ARLweb页面：`https://IP:5003/`
 
 `账号：admin，密码：honmashironeko`
 
-## 手动安装步骤：
 
-此处请注意，根据您希望安装的 docker 镜像进行选择，“honmashironeko/” 后面应当跟着"arl-docker-initial、arl-docker-all"其中一个。
-
-安装docker：`yum -y install docker`
-
-其他系统安装：`apt install docker.io -y`
-
-启动docker服务：`systemctl start docker`
-
-拉取docker镜像：`docker pull honmashironeko/arl-docker-initial`
-
-运行docker容器：`docker run -d -p 5003:5003 --name arl --privileged=true honmashironeko/arl-docker-initial /usr/sbin/init`
-
-在安装完成之后进入容器：`docker exec -it arl /bin/bash`
-
-开始完成ARL部署：`bash /root/arl/set.sh`
-
-前往ARLweb页面：`https://IP:5003/`
-
-`账号：admin，密码：honmashironeko`
-
-![image](https://github.com/honmashironeko/ARL-docker/assets/139044047/8cd0408b-880b-4772-821d-932c7f1a948f)
 
 
 # 特别鸣谢
@@ -118,6 +88,6 @@ Github：https://github.com/honmashironeko/icpscan/releases
 
 进入ARL控制文件目录：`cd /opt/ARL/misc`
 
-增加运行权限：`chmod +x manage.sh`
+重启ARL相关服务：`bash manage.sh restart`
 
-重启ARL相关服务：`./manage.sh restart`
+如果您要重启 docker 容器，或重启系统，请先运行`bash /opt/ARL/misc/manage.sh stop`
