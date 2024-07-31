@@ -42,6 +42,29 @@ else
     exit 1
 fi
 
+# 创建配置文件
+config_file="/etc/docker/daemon.json"
+if [ -f "$config_file" ]; then
+    mv "$config_file" "$config_file.bak"
+fi
+cat > "$config_file" <<EOF
+{
+    "registry-mirrors": [
+        "https://yxzrazem.mirror.aliyuncs.com",
+        "http://hub-mirror.c.163.com",
+        "https://registry.docker-cn.com",
+        "http://hub-mirror.c.163.com",
+        "https://docker.mirrors.ustc.edu.cn"
+    ],
+    "log-driver": "json-file",
+    "log-opts": {
+        "max-size": "1024m",
+        "max-file": "3"
+    }
+}
+EOF
+systemctl daemon-reload
+
 echo "正在启动 Docker 服务..."
 if ! systemctl start docker; then
     echo "启动 Docker 服务失败。"
