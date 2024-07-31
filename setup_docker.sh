@@ -48,13 +48,15 @@ read -p "请输入选项（1-2）：" version_choice
 case $version_choice in
     1)
         echo "正在拉取 Docker 镜像：arl-docker-initial..."
-        docker build -t arl -f ./docker-initial/Dockerfile .
+        cd docker-initial
+        docker build -t arl .
         echo "正在运行 Docker 容器..."
         docker run -d --name arl --privileged -p 5003:5003 honmashironeko/arl-docker-initial
         ;;
     2)
         echo "正在拉取 Docker 镜像：arl-docker-all..."
-        docker build -t arl -f ./docker-all/Dockerfile .
+        cd docker-all
+        docker build -t arl .
         echo "正在运行 Docker 容器..."
         docker run -d --name arl --privileged -p 5003:5003 honmashironeko/arl-docker-all
         ;;
