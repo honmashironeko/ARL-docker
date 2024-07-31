@@ -59,11 +59,15 @@ read -p "请输入选项（1-2）：" version_choice
 case $version_choice in
     1)
         echo "正在拉取 Docker 镜像：arl-docker-initial..."
-        docker run -d -p 5003:5003 --name arl --privileged=true honmashironeko/arl-docker-initial /usr/sbin/init
+        docker build -t arl -f docker-initial/Dockerfile .
+        echo "正在运行 Docker 容器..."
+        docker run -d --name arl --privileged -p 5003:5003 arl
         ;;
     2)
         echo "正在拉取 Docker 镜像：arl-docker-all..."
-        docker run -d -p 5003:5003 --name arl --privileged=true honmashironeko/arl-docker-all /usr/sbin/init
+        docker build -t arl -f docker-all/Dockerfile .
+        echo "正在运行 Docker 容器..."
+        docker run -d --name arl --privileged -p 5003:5003 arl
         ;;
     *)
         echo "无效的输入，脚本将退出。"
