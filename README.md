@@ -24,7 +24,8 @@
 
 ![Clip_2024-07-31_18-21-38](https://github.com/user-attachments/assets/53a11bbb-599c-453c-b302-45d4c63dcfb8)
 
-![Clip_2024-07-31_18-22-20](https://github.com/user-attachments/assets/aff18253-31a9-4e58-9475-bc3f04fb3345)
+![Clip_2024-07-31_19-07-42](https://github.com/user-attachments/assets/597ec41e-fd92-4cb8-adef-17dfcc4ccc2e)
+
 
 根据脚本提示进行操作
 
