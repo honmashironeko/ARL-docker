@@ -10,6 +10,8 @@ echo "部署完成"
 echo "Docker 镜像作者：本间白猫"
 echo "公众号：樱花庄的本间白猫"
 echo "博客：https://y.shironekosan.cn" 
+echo "Github：https://github.com/honmashironeko/ARL-docker"
+echo "感谢您使用本脚本，请仔细阅读脚本内容，根据提示进行操作。"
 
 echo -n "按任意键继续..."
 read -n 1 -s
@@ -30,7 +32,12 @@ else
 fi
 
 echo "正在启动 Docker 服务..."
-systemctl start docker
+if ! systemctl start docker; then
+    echo "启动 Docker 服务失败。"
+    echo "请手动检查 Docker 服务是否成功安装"
+    exit 1
+fi
+echo "Docker 服务启动成功。"
 
 # 安装ARL
 echo "请选择要安装的版本："
@@ -59,7 +66,8 @@ case $version_choice in
         ;;
 esac
 
-echo "部署完成"
+echo "已完成ARL部署，感谢您的使用，如果对您有帮助，请给我们点个赞，谢谢！"
+echo "Github：https://github.com/honmashironeko/ARL-docker"
 
 # 输出URL
 CURRENT_IP=$(hostname -I | awk '{print \$1}')
