@@ -21,8 +21,10 @@ read -p "请输入选项（1-2）：" sz
 case $sz in
     1)
         echo "不进行更换，使用默认下载源"
+        ;;
     2)
         bash main.sh
+        ;;
     *)
         echo "无效的输入，脚本将退出。"
         exit 1
