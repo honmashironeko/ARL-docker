@@ -21,6 +21,7 @@
 添加运行权限： `chmod +x setup_docker.sh`
 
 执行部署脚本：`bash setup_docker.sh`
+
 ![Clip_2024-07-31_18-21-38](https://github.com/user-attachments/assets/53a11bbb-599c-453c-b302-45d4c63dcfb8)
 
 ![Clip_2024-07-31_18-22-20](https://github.com/user-attachments/assets/aff18253-31a9-4e58-9475-bc3f04fb3345)
@@ -30,9 +31,6 @@
 前往ARLweb页面：`https://IP:5003/`
 
 `账号：admin，密码：honmashironeko`
-
-
-
 
 # 特别鸣谢
 
