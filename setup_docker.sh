@@ -7,7 +7,7 @@ echo "博客：https://y.shironekosan.cn"
 echo "Github：https://github.com/honmashironeko/ARL-docker"
 echo "感谢您使用本脚本，请仔细阅读脚本内容，根据提示进行操作。"
 
-echo -n "按任意键继续..."
+echo -n "按回测键继续..."
 read -n 1 -s
 clear
 
@@ -16,7 +16,8 @@ clear
 echo "请选择是否需要更换 yum 或 apt 下载源："
 echo "1) 不进行更换，使用默认下载源"
 echo "2) 运行替换脚本，更换下载源"
-read -p "请输入选项（1-2）：" sz
+read -p "请输入选项（1-2）[默认1]: " sz
+sz=${sz:-1}
 
 case $sz in
     1)
