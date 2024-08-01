@@ -106,6 +106,6 @@ echo "已完成ARL部署，感谢您的使用，如果对您有帮助，请给�
 echo "Github：https://github.com/honmashironeko/ARL-docker"
 
 # 输出URL
-CURRENT_IP=$(hostname -I | awk '{print $1}')
+CURRENT_IP=$(curl ipinfo.io/ip)
 URL="https://${CURRENT_IP}:5003"
 echo $URL
