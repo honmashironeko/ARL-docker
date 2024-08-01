@@ -49,21 +49,25 @@ if [ -f "$config_file" ]; then
 fi
 cat > "$config_file" <<EOF
 {
-    "registry-mirrors": [
+  "registry-mirrors":
+   [
+        "https://docker.1panel.live",
         "https://yxzrazem.mirror.aliyuncs.com",
         "http://hub-mirror.c.163.com",
         "https://registry.docker-cn.com",
-        "http://hub-mirror.c.163.com",
-        "https://docker.mirrors.ustc.edu.cn"
-    ],
-    "log-driver": "json-file",
-    "log-opts": {
-        "max-size": "1024m",
-        "max-file": "3"
-    }
+        "https://docker.mirrors.sjtug.sjtu.edu.cn",
+        "https://docker.m.daocloud.io",
+        "https://docker.itelyou.cf",
+        "https://noohub.ru",
+        "https://docker.fxxk.dedyn.io",
+        "https://huecker.io",
+        "https://dockerhub.timeweb.cloud",
+        "https://registry.cn-hangzhou.aliyuncs.com"
+   ]
 }
 EOF
 systemctl daemon-reload
+systemctl restart docker
 
 echo "正在启动 Docker 服务..."
 if ! systemctl start docker; then
