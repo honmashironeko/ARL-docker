@@ -89,13 +89,13 @@ case $version_choice in
         echo "正在拉取 Docker 镜像：arl-docker-initial..."
         docker build -t arl -f docker-initial/Dockerfile .
         echo "正在运行 Docker 容器..."
-        docker run -d --name arl --privileged -p 5003:5003 arl
+        docker run -d --name arl --privileged=true -p 5003:5003 arl
         ;;
     2)
         echo "正在拉取 Docker 镜像：arl-docker-all..."
         docker build -t arl -f docker-all/Dockerfile .
         echo "正在运行 Docker 容器..."
-        docker run -d --name arl --privileged -p 5003:5003 arl
+        docker run -d --name arl --privileged=true -p 5003:5003 arl
         ;;
     *)
         echo "无效的输入，脚本将退出。"
