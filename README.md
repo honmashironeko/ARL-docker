@@ -14,6 +14,7 @@
 
 ## 一键部署脚本：
 
+更换Yum源方法：将本项目中的mian.sh文件内容复制粘贴到您的系统中，并bash mian.sh运行，按照提示操作
 下载部署脚本项目：`git clone https://github.com/honmashironeko/ARL-docker.git`
 
 进入项目文件夹：`cd ARL-docker/`
