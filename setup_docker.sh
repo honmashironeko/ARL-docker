@@ -7,7 +7,7 @@ echo "博客：https://y.shironekosan.cn"
 echo "Github：https://github.com/honmashironeko/ARL-docker"
 echo "感谢您使用本脚本，请仔细阅读脚本内容，根据提示进行操作。"
 
-echo -n "按回测键继续..."
+echo -n "按回车键继续..."
 read -n 1 -s
 clear
 
@@ -36,8 +36,10 @@ if command -v yum &> /dev/null; then
     echo "正在使用 yum 安装 Docker..."
     yum install -y docker
 elif command -v apt-get &> /dev/null; then
+    echo "正在使用 apt 卸载 selinux*..."
+    apt-get update && apt-get remove -y selinux* && apt-get autoremove
     echo "正在使用 apt 安装 Docker.io..."
-    apt-get update && apt-get install -y docker.io
+    apt-get install -y docker.io
 else
     echo "无法确定包管理器。请手动安装 Docker。"
     exit 1
@@ -45,13 +47,20 @@ fi
 
 # 创建配置文件
 config_file="/etc/docker/daemon.json"
+mkdir -p $(dirname $config_file)
+
+if [ ! -f "$config_file" ]; then
+    echo "{}" > "$config_file"
+fi
+
 if [ -f "$config_file" ]; then
     mv "$config_file" "$config_file.bak"
 fi
 cat > "$config_file" <<EOF
 {
   "registry-mirrors":
-   [
+   [    
+        "hub.msqh.net",
         "https://docker.1panel.live",
         "https://yxzrazem.mirror.aliyuncs.com",
         "http://hub-mirror.c.163.com",
@@ -68,7 +77,7 @@ cat > "$config_file" <<EOF
 }
 EOF
 systemctl daemon-reload
-systemctl restart docker
+systemctl start docker
 
 echo "正在启动 Docker 服务..."
 if ! systemctl start docker; then
@@ -78,35 +87,42 @@ if ! systemctl start docker; then
 fi
 echo "Docker 服务启动成功。"
 
-# 安装ARL
-echo "请选择要安装的版本："
-echo "1) arl-docker-initial：ARL初始版本，仅去除域名限制。"
-echo "2) arl-docker-all：ARL完全指纹版本，去除域名限制，全量 7165 条指纹。"
-read -p "请输入选项（1-2）：" version_choice
+cp docker-compose /usr/local/bin/docker-compose
+chmod +x /usr/local/bin/docker-compose
 
-case $version_choice in
-    1)
-        echo "正在拉取 Docker 镜像：arl-docker-initial..."
-        docker build -t arl -f docker-initial/Dockerfile .
-        echo "正在运行 Docker 容器..."
-        docker run -d --name arl --privileged=true -p 5003:5003 arl
+# 安装ARL
+echo "开始部署"
+docker volume create --name=arl_db
+docker-compose up -d
+
+read -p  "请确认是否添加指纹：[y/N]" yn
+yn=${yn:-N}
+case $yn in
+    N)
+        echo "无效的输入，不添加指纹。"
         ;;
-    2)
-        echo "正在拉取 Docker 镜像：arl-docker-all..."
-        docker build -t arl -f docker-all/Dockerfile .
-        echo "正在运行 Docker 容器..."
-        docker run -d --name arl --privileged=true -p 5003:5003 arl
-        ;;
-    *)
-        echo "无效的输入，脚本将退出。"
-        exit 1
+    y)
+        echo "安装 python 环境"
+        if command -v yum &> /dev/null; then
+            yum install -y python3
+            pip3 install requests
+            python3 ARL-Finger-ADD.py https://127.0.0.1:5003/ admin honmashironeko
+        elif command -v apt-get &> /dev/null; then
+            apt-get install -y python3 && apt-get install -y python3-pip
+            pip install requests
+            python3 ARL-Finger-ADD.py https://127.0.0.1:5003/ admin honmashironeko
+        else
+            echo "无法确定包管理器。请手动安装 Python3。"
+            exit 1
+        fi
+
         ;;
 esac
-
 echo "已完成ARL部署，感谢您的使用，如果对您有帮助，请给我们点个赞，谢谢！"
 echo "Github：https://github.com/honmashironeko/ARL-docker"
-
+echo "博客：https://y.shironekosan.cn" 
+echo "公众号：樱花庄的本间白猫"
 # 输出URL
 CURRENT_IP=$(curl -s ipinfo.io/ip)
 URL="https://${CURRENT_IP}:5003"
-echo $URL
+echo "ARL URL: $URL"

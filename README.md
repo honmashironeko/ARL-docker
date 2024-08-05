@@ -2,12 +2,10 @@
 
 # ARL(灯塔）-docker版
 
-本项目基于渊龙团队备份：[ARL](https://github.com/Aabyss-Team/ARL) v2.6.2版本源码，制作成docker镜像进行快速部署，并提供两种指纹规格的镜像。
+本项目基于渊龙团队备份：[ARL](https://github.com/Aabyss-Team/ARL) v2.6.2版本源码，制作成docker镜像进行快速部署。
 
-1.  arl-docker-initial：ARL初始版本，仅去除域名限制。
+1.  提供自选指纹是否添加方案，可根据需求选择。
 
-2.  arl-docker-all：ARL完全指纹版本，去除域名限制，全量 7165 条指纹。
-  
 3.  请注意，添加指纹的工具借用的是 ARL-Finger-ADD ，但指纹不是哦，由多处获取，经过格式转换、指纹去重后保留下来的一批指纹，原指纹量达到6w+但其实重复极多。
 
 # 使用教程
@@ -23,8 +21,6 @@
 执行部署脚本：`bash setup_docker.sh`
 
 ![Clip_2024-07-31_18-21-38](https://github.com/user-attachments/assets/53a11bbb-599c-453c-b302-45d4c63dcfb8)
-
-![Clip_2024-07-31_19-07-42](https://github.com/user-attachments/assets/597ec41e-fd92-4cb8-adef-17dfcc4ccc2e)
 
 
 根据脚本提示进行操作

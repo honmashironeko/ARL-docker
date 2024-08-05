@@ -10,14 +10,13 @@ tee /etc/yum.repos.d/mongodb-org-4.0.repo <<"EOF"
 name=MongoDB Repository
 baseurl=https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/4.0/x86_64/
 gpgcheck=1
-enabled=1
+enabled=1 
 gpgkey=https://www.mongodb.org/static/pgp/server-4.0.asc
 EOF
 
 echo "install dependencies ..."
-yum install epel-release -y
-yum install python36 mongodb-org-server mongodb-org-shell rabbitmq-server python36-devel gcc-c++ git \
- nginx  fontconfig wqy-microhei-fonts unzip wget -y
+yum install  -y
+yum install epel-release python36 mongodb-org-server mongodb-org-shell rabbitmq-server python36-devel gcc-c++ git nginx fontconfig wqy-microhei-fonts unzip wget -y
 
 if [ ! -f /usr/bin/python3.6 ]; then
   echo "link python3.6"
@@ -173,13 +172,9 @@ fi
 echo "start arl services ..."
 systemctl enable arl-web
 systemctl start arl-web
-systemctl enable arl-worker
 systemctl start arl-worker
-systemctl enable arl-worker-github
 systemctl start arl-worker-github
-systemctl enable arl-scheduler
 systemctl start arl-scheduler
-systemctl enable nginx
 systemctl start nginx
 
 systemctl status arl-web
