@@ -8,9 +8,13 @@
 
 3.  请注意，添加指纹的工具借用的是 ARL-Finger-ADD ，但指纹不是哦，由多处获取，经过格式转换、指纹去重后保留下来的一批指纹，原指纹量达到6w+但其实重复极多。
 
+4.  目前只支持 CentOS 等 Yum 安装包管理器的系统，因 Ubuntu 等采用 Apt 安装包管理器的系统无法使用 D-bus ，目前还在思考解决方案，如果有解决方案，辛苦您告知一下作者！
+
 # 使用教程
 
 ## 一键部署脚本：
+
+更换Yum源方法：将本项目中的mian.sh文件内容复制粘贴到您的系统中，并bash mian.sh运行，按照提示操作
 
 下载部署脚本项目：`git clone https://github.com/honmashironeko/ARL-docker.git`
 
