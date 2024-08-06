@@ -76,16 +76,8 @@ Github：https://github.com/honmashironeko/icpscan/releases
 
 如果需要配置 KEY 等内容，或控制 ARL 开启和关闭，可以采用以下方法
 
-您需要先进入容器中再进行操作，方法如下
+关闭 ARL 命令：`docker-compose down`
 
-进入容器命令：`docker exec -it 镜像名称 /bin/bash`
+启动 ARL 命令：`docker-compose up -d`
 
-进入配置文件目录：`cd /opt/ARL/app`
-
-编辑配置文件：`vi config.yaml`
-
-进入ARL控制文件目录：`cd /opt/ARL/misc`
-
-重启ARL相关服务：`bash manage.sh restart`
-
-如果您要重启 docker 容器，或重启系统，请先运行`bash /opt/ARL/misc/manage.sh stop`
+编辑配置文件：`vi config-docker.yaml`
