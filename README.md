@@ -26,6 +26,8 @@
 
 ![Clip_2024-07-31_18-21-38](https://github.com/user-attachments/assets/53a11bbb-599c-453c-b302-45d4c63dcfb8)
 
+![1722872080431](https://github.com/user-attachments/assets/8e9cc085-1c39-4d4a-b7f8-7cd290895f6a)
+
 
 根据脚本提示进行操作
 
