@@ -37,7 +37,8 @@ if command -v yum &> /dev/null; then
     yum install -y docker
 elif command -v apt-get &> /dev/null; then
     echo "正在使用 apt 卸载 selinux*..."
-    apt-get update && apt-get remove -y selinux* && apt-get autoremove
+    touch /etc/selinux/config
+    apt-get update && apt-get install -y selinux-utils && setenforce 0 && sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
     echo "正在使用 apt 安装 Docker.io..."
     apt-get install -y docker.io
 else
@@ -45,21 +46,18 @@ else
     exit 1
 fi
 
-# 创建配置文件
-config_file="/etc/docker/daemon.json"
-mkdir -p $(dirname $config_file)
-
-if [ ! -f "$config_file" ]; then
-    echo "{}" > "$config_file"
-fi
-
-if [ -f "$config_file" ]; then
-    mv "$config_file" "$config_file.bak"
-fi
-cat > "$config_file" <<EOF
+yum-docker(){
+    config_file="/etc/docker/daemon.json"
+    mkdir -p $(dirname $config_file)
+    if [ ! -f "$config_file" ]; then
+        echo "{}" > "$config_file"
+    fi
+    if [ -f "$config_file" ]; then
+        mv "$config_file" "$config_file.bak"
+    fi
+    cat > "$config_file" <<EOF
 {
-  "registry-mirrors":
-   [    
+    "registry-mirrors": [
         "hub.msqh.net",
         "https://docker.1panel.live",
         "https://yxzrazem.mirror.aliyuncs.com",
@@ -73,11 +71,34 @@ cat > "$config_file" <<EOF
         "https://huecker.io",
         "https://dockerhub.timeweb.cloud",
         "https://registry.cn-hangzhou.aliyuncs.com"
-   ]
+    ]
 }
 EOF
+}
+
+apt-docker() {
+    config_file="/etc/apt/sources.list.d/docker.list"
+    mkdir -p $(dirname $config_file)
+    if [ -f "$config_file" ]; then
+        mv "$config_file" "$config_file.bak"
+    fi
+    cat > "$config_file" <<EOF
+deb [arch=amd64] https://mirrors.tuna.tsinghua.edu.cn/docker-ce/linux/ubuntu $(lsb_release -cs) stable
+EOF
+}
+
+if command -v yum &> /dev/null; then
+    echo "正在更换 Docker 源..."
+    yum-docker
+elif command -v apt-get &> /dev/null; then
+    echo "正在更换 Docker.io 源..."
+    apt-docker
+else
+    echo "无法确定包管理器。请手动更换 Docker 源。"
+    exit 1
+fi
 systemctl daemon-reload
-systemctl start docker
+systemctl restart docker
 
 echo "正在启动 Docker 服务..."
 if ! systemctl start docker; then
