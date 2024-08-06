@@ -38,7 +38,7 @@ if command -v yum &> /dev/null; then
 elif command -v apt-get &> /dev/null; then
     echo "正在使用 apt 卸载 selinux*..."
     touch /etc/selinux/config
-    apt-get update && apt-get install -y selinux-utils && setenforce 0 && sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
+    apt-get update
     echo "正在使用 apt 安装 Docker.io..."
     apt-get install -y docker.io
 else
