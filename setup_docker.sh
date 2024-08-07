@@ -86,7 +86,7 @@ deb [arch=amd64] https://mirrors.tuna.tsinghua.edu.cn/docker-ce/linux/ubuntu $(l
 EOF
 }
 
-    REGISTRY="https://index.docker.io/v1/"
+    REGISTRY="https://index.docker.io"
     curl -s --head --request GET $REGISTRY | head -n 1 | grep "200" > /dev/null 2>&1
     if [ $? -eq 0 ]; then
         echo "成功连接到 $REGISTRY"
