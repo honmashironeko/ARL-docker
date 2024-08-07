@@ -32,30 +32,29 @@ case $sz in
         ;;
 esac
 
-if command -v yum &> /dev/null; then
-    echo "正在使用 yum 安装 Docker..."
-    yum install -y docker
-elif command -v apt-get &> /dev/null; then
-    echo "正在使用 apt 卸载 selinux*..."
-    touch /etc/selinux/config
-    apt-get update
-    echo "正在使用 apt 安装 Docker.io..."
-    apt-get install -y docker.io
-else
-    echo "无法确定包管理器。请手动安装 Docker。"
-    exit 1
-fi
+install_docker(){
+    if command -v yum &> /dev/null; then
+        echo "正在使用 yum 安装 Docker..."
+        yum install -y docker
+    elif command -v apt-get &> /dev/null; then
+        apt-get update
+        echo "正在使用 apt 安装 Docker.io..."
+        apt-get install -y docker.io
+    else
+        echo "无法确定包管理器。请手动安装 Docker。"
+        exit 1
+    fi
 
-yum-docker(){
-    config_file="/etc/docker/daemon.json"
-    mkdir -p $(dirname $config_file)
-    if [ ! -f "$config_file" ]; then
-        echo "{}" > "$config_file"
-    fi
-    if [ -f "$config_file" ]; then
-        mv "$config_file" "$config_file.bak"
-    fi
-    cat > "$config_file" <<EOF
+    yum-docker(){
+        config_file="/etc/docker/daemon.json"
+        mkdir -p $(dirname $config_file)
+        if [ ! -f "$config_file" ]; then
+            echo "{}" > "$config_file"
+        fi
+        if [ -f "$config_file" ]; then
+            mv "$config_file" "$config_file.bak"
+        fi
+        cat > "$config_file" <<EOF
 {
     "registry-mirrors": [
         "hub.msqh.net",
@@ -76,41 +75,66 @@ yum-docker(){
 EOF
 }
 
-apt-docker() {
-    config_file="/etc/apt/sources.list.d/docker.list"
-    mkdir -p $(dirname $config_file)
-    if [ -f "$config_file" ]; then
-        mv "$config_file" "$config_file.bak"
-    fi
-    cat > "$config_file" <<EOF
+    apt-docker() {
+        config_file="/etc/apt/sources.list.d/docker.list"
+        mkdir -p $(dirname $config_file)
+        if [ -f "$config_file" ]; then
+            mv "$config_file" "$config_file.bak"
+        fi
+        cat > "$config_file" <<EOF
 deb [arch=amd64] https://mirrors.tuna.tsinghua.edu.cn/docker-ce/linux/ubuntu $(lsb_release -cs) stable
 EOF
 }
 
-if command -v yum &> /dev/null; then
-    echo "正在更换 Docker 源..."
-    yum-docker
-elif command -v apt-get &> /dev/null; then
-    echo "正在更换 Docker.io 源..."
-    apt-docker
-else
-    echo "无法确定包管理器。请手动更换 Docker 源。"
-    exit 1
-fi
-systemctl daemon-reload
-systemctl restart docker
+    REGISTRY="https://index.docker.io/v1/"
+    curl -s --head --request GET $REGISTRY | head -n 1 | grep "200" > /dev/null 2>&1
+    if [ $? -eq 0 ]; then
+        echo "成功连接到 $REGISTRY"
+    else
+        if command -v yum &> /dev/null; then
+            echo "正在更换 Docker 源..."
+            yum-docker
+        elif command -v apt-get &> /dev/null; then
+            echo "正在更换 Docker.io 源..."
+            apt-docker
+        else
+            echo "无法确定包管理器。请手动更换 Docker 源。"
+            exit 1
+        fi
+    fi
 
-echo "正在启动 Docker 服务..."
-if ! systemctl start docker; then
-    echo "启动 Docker 服务失败。"
-    echo "请手动检查 Docker 服务是否成功安装"
-    exit 1
-fi
-echo "Docker 服务启动成功。"
 
-cp docker-compose /usr/local/bin/docker-compose
-chmod +x /usr/local/bin/docker-compose
+    systemctl daemon-reload
+    systemctl restart docker
 
+    echo "正在启动 Docker 服务..."
+    if ! systemctl start docker; then
+        echo "启动 Docker 服务失败。"
+        echo "请手动检查 Docker 服务是否成功安装"
+        exit 1
+    fi
+    echo "Docker 服务启动成功。"
+
+    cp docker-compose /usr/local/bin/docker-compose
+    chmod +x /usr/local/bin/docker-compose
+}
+
+clear
+echo "如果您已安装过 Docker 服务，请输入y，否则输入n"
+read -p  "是否进入仅执行安装程序：[y/N]" iz
+iz=${iz:-N}
+case $iz in
+    y)
+        echo "仅安装ARL"
+        ;;
+    N)
+        install_docker
+        ;;
+    *)
+        echo "无效的输入，脚本将退出。"
+        exit 1
+        ;;
+esac
 # 安装ARL
 echo "开始部署"
 docker volume create --name=arl_db
