@@ -128,7 +128,7 @@ case $iz in
     y)
         echo "仅安装ARL"
         ;;
-    N)
+    n)
         install_docker
         ;;
     *)
