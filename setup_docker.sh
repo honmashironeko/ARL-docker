@@ -36,6 +36,7 @@ install_docker(){
     if command -v yum &> /dev/null; then
         echo "正在使用 yum 安装 Docker..."
         yum install -y docker
+        setenforce 0
     elif command -v apt-get &> /dev/null; then
         apt-get update
         echo "正在使用 apt 安装 Docker.io..."
