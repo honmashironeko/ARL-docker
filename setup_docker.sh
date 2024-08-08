@@ -123,17 +123,13 @@ EOF
 clear
 echo "如果您已安装过 Docker 服务，请输入y，否则输入n"
 read -p  "是否进入仅执行安装程序：[y/N]" iz
-iz=${iz:-N}
+iz=${iz:-n}
 case $iz in
     y)
         echo "仅安装ARL"
         ;;
     n)
         install_docker
-        ;;
-    *)
-        echo "无效的输入，脚本将退出。"
-        exit 1
         ;;
 esac
 # 安装ARL
