@@ -40,6 +40,8 @@
 
 感谢部分指纹提供：https://blog.zgsec.cn/
 
+感谢指纹添加脚本作者：https://github.com/loecho-sec/ARL-Finger-ADD
+
 # 源码安装
 
 根据ARL官方V2.6.2版本源码，修复部分bug之后制作完成的源码安装脚本
