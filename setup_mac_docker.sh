@@ -6,6 +6,19 @@ echo "🎉 欢迎使用 ARL Mac 快速部署脚本 by lixiasky & 本间白猫"
 echo "🌐 项目地址：https://github.com/honmashironeko/ARL-docker"
 echo ""
 
+echo "🌐 国内用户建议提前安装并配置 ClashX 或其他代理工具，确保网络畅通。"
+read -p "已安装并配置好代理节点？[Y/n]: " proxy_confirm
+proxy_confirm=${proxy_confirm:-Y}
+
+if [[ "$proxy_confirm" != "Y" && "$proxy_confirm" != "y" ]]; then
+  echo "🔧 自动设置 http_proxy 环境变量为 http://127.0.0.1:7890"
+  export http_proxy=http://127.0.0.1:7890
+  export https_proxy=http://127.0.0.1:7890
+  echo "如需自定义端口，请手动修改 http_proxy/https_proxy 环境变量。"
+else
+  echo "✅ 已配置好代理，继续执行..."
+fi
+
 # 提醒用户已经准备好了 Docker（由 OrbStack 或 Docker Desktop 提供）
 echo "✅ 请确保你已正确安装 Docker，并在运行状态"
 docker -v || { echo "❌ 未检测到 Docker，请先安装 Docker 后再运行本脚本"; exit 1; }
@@ -41,6 +54,21 @@ if [[ "$addfinger" == "Y" || "$addfinger" == "y" ]]; then
 
   echo "📦 正在安装 requests 库（如已安装会跳过）..."
   pip3 install requests --user
+
+  echo "⏳ 检查 ARL 服务是否已启动..."
+  for i in {1..10}; do
+    if curl -s http://localhost:5003 >/dev/null; then
+      echo "✅ ARL 服务已启动，准备添加指纹"
+      break
+    else
+      echo "等待 ARL 服务启动中...($i/10)"
+      sleep 2
+    fi
+    if [ $i -eq 10 ]; then
+      echo "❌ ARL 服务启动超时，无法添加指纹"
+      exit 1
+    fi
+  done
 
   echo "📥 运行指纹添加脚本..."
   python3 ARL-Finger-ADD.py https://127.0.0.1:5003/ admin honmashironeko
