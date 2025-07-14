@@ -62,7 +62,7 @@ if [[ "$addfinger" == "Y" || "$addfinger" == "y" ]]; then
       break
     else
       echo "等待 ARL 服务启动中...($i/10)"
-      sleep 2
+      sleep 10
     fi
     if [ $i -eq 10 ]; then
       echo "❌ ARL 服务启动超时，无法添加指纹"
