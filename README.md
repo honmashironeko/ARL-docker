@@ -3,7 +3,7 @@
 # ARL(灯塔）-docker版(已支持Linux和macos)
 
 本项目基于渊龙团队备份：[ARL](https://github.com/Aabyss-Team/ARL) v2.6.2版本源码，制作成docker镜像进行快速部署。
-> macOS 用户请直接滑至文末查看 [Mac 适配部署指南](#macos-快速部署指南)
+> macOS 用户请直接滑至文末查看 [Mac 适配部署指南](#macos-快速部署指南-适配-orbstack--docker-desktop)
 
 1.  提供自选指纹是否添加方案，可根据需求选择。
 2.  请注意，添加指纹的工具借用的是 ARL-Finger-ADD ，但指纹不是哦，由多处获取，经过格式转换、指纹去重后保留下来的一批指纹，原指纹量达到6w+但其实重复极多。
