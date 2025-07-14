@@ -57,8 +57,10 @@ if [[ "$addfinger" == "Y" || "$addfinger" == "y" ]]; then
 
   echo "⏳ 检查 ARL 服务是否已启动..."
   for i in {1..10}; do
+
     if curl -s http://localhost:5003 >/dev/null; then
-      echo "✅ ARL 服务已启动，准备添加指纹"
+      echo "✅ ARL 服务端口已开放，等待服务完全初始化...(8秒)"
+      sleep 8
       break
     else
       echo "等待 ARL 服务启动中...($i/10)"
@@ -76,9 +78,10 @@ else
   echo "🚫 跳过指纹添加"
 fi
 
+echo "❗️ 如果指纹添加失败，比如返回 Expecting value: line 1 column 1 (char 0)，请再运行一次脚本添加指纹"
 echo ""
 echo "🎉 ARL 部署完成，请访问："
-echo "🔗 http://localhost:5003"
+echo "🔗 http://127.0.0.1:5003"
 echo "🔐 默认账号：admin / honmashironeko"
 echo ""
 echo "✨ 感谢你的使用，记得 Star 一下原项目支持作者鸭~"
