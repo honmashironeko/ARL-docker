@@ -179,6 +179,7 @@ case $yn in
 
         # 安装 requests 包
         pip3 install --upgrade requests
+        python3 ARL-Finger-ADD.py https://127.0.0.1:5003/ admin honmashironeko
 
         ;;
 esac
