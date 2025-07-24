@@ -1,5 +1,8 @@
 #!/bin/bash
-
+if [ "$EUID" -ne 0 ]; then
+  echo "请使用 root 用户运行此脚本，或者使用 sudo 执行"
+  exit 1
+fi
 # 简单介绍
 echo "Docker 镜像作者：本间白猫"
 echo "公众号：樱花庄的本间白猫"
@@ -121,17 +124,14 @@ EOF
 }
 
 clear
-echo "如果您已安装过 Docker 服务，请输入y，否则输入n"
-read -p  "是否进入仅执行安装程序：[y/N]" iz
-iz=${iz:-n}
-case $iz in
-    y)
-        echo "仅安装ARL"
-        ;;
-    n)
-        install_docker
-        ;;
-esac
+
+if command -v docker &> /dev/null; then
+    echo "已检测到 Docker 已安装。"
+else
+    echo "未检测到 Docker，将自动安装。"
+    install_docker
+fi
+
 # 安装ARL
 echo "开始部署"
 docker volume create --name=arl_db
@@ -144,19 +144,41 @@ case $yn in
         echo "无效的输入，不添加指纹。"
         ;;
     y)
-        echo "安装 python 环境"
-        if command -v yum &> /dev/null; then
-            yum install -y python3
-            pip3 install requests
-            python3 ARL-Finger-ADD.py https://127.0.0.1:5003/ admin honmashironeko
-        elif command -v apt-get &> /dev/null; then
-            apt-get install -y python3 && apt-get install -y python3-pip
-            pip install requests
-            python3 ARL-Finger-ADD.py https://127.0.0.1:5003/ admin honmashironeko
+        echo "检测 Python 和 pip 环境"
+
+        has_python=false
+        has_pip=false
+
+        if command -v python3 &> /dev/null; then
+            has_python=true
         else
-            echo "无法确定包管理器。请手动安装 Python3。"
-            exit 1
+            echo "未检测到 python3"
         fi
+
+        if command -v pip3 &> /dev/null; then
+            has_pip=true
+        else
+            echo "未检测到 pip3"
+        fi
+
+        if [ "$has_python" = false ] || [ "$has_pip" = false ]; then
+            echo "安装 python3 和 pip3"
+
+            if command -v yum &> /dev/null; then
+                yum install -y python3 python3-pip
+            elif command -v apt-get &> /dev/null; then
+                apt-get update
+                apt-get install -y python3 python3-pip
+            else
+                echo "无法确定包管理器。请手动安装 Python3 和 pip3。"
+                exit 1
+            fi
+        else
+            echo "Python3 和 pip3 已安装"
+        fi
+
+        # 安装 requests 包
+        pip3 install --upgrade requests
 
         ;;
 esac
